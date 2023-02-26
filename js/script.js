@@ -9,7 +9,6 @@ Sulla base di queste informazioni dovrà calcolare il prezzo totale del bigliett
 - va applicato uno sconto del 40% per gli over 65.
 */
 
-
 /* 
 -memorizzare numero kilometri inserito
 -memorizzare età del passeggero inserita
@@ -27,25 +26,19 @@ Sulla base di queste informazioni dovrà calcolare il prezzo totale del bigliett
 let costumerNickname = document.getElementById("costumerNameAndSurname").value;
 console.log("Inserito nome passeggero: " + costumerNickname);
 
-//prezzo standard biglietto
+// // memorizzare prezzo biglietto 0.21€/km
 let kmPrice = 0.21;
 let ticketPrice = (kmElement.value * kmPrice);
 // test
 console.log(`Prezzo standard: ${ticketPrice}`);
 
-
-
 // memorizzare età del passeggero inserita
 let costumerAge = document.getElementById("SelectAge").selectedIndex;
-// console.log(costumerAge)
 
 
 // RECUPERATO SCHEMA REPO PRECEDENTE (DA MODIFICARE)
 
-// // memorizzare prezzo biglietto 0.21€/km
-
 let ticketPriceRounded = Math.round((ticketPrice + Number.EPSILON) * 100) / 100;
-
 // // aggiunta variabili
 let priceUnderAge;
 let priceOverAge;
@@ -76,15 +69,16 @@ button.addEventListener("click", function() {
     }
 
     let kmChoosen = costumerKm.value;
-
+    // STAMP
     document.getElementById("newTicket").style.display = "block";
     document.getElementById("genNickname").innerHTML = "Dati passeggero: " + costumerNickname;     
     document.getElementById("genKm").innerHTML = "Km del viaggio: " + kmChoosen;
     document.getElementById("genTicketPrice").innerHTML = "Prezzo del biglietto: <strong>€" + ticketPrice + "</strong>";
 });
 
+// CLOSE BUTTON
 document.getElementById("closeTicket").addEventListener("click", function() {
-  
+    // reset
     document.getElementById("newTicket").style.display = "none";
     costumerKm.value = "";
     costumerAge.value = "";
