@@ -34,11 +34,7 @@ let ticketPrice = (kmElement.value * kmPrice);
 console.log(`Prezzo standard: ${ticketPrice}`);
 
 
-// memorizzare numero di kimometri inserito
-let costumerKm = document.getElementById("kmElement");
-let kmChoosen = costumerKm.value;
-// test
-console.log("Inseriti kilometri da percorrere: " + kmChoosen);
+
 // memorizzare età del passeggero inserita
 let costumerAge = document.getElementById("SelectAge").selectedIndex;
 // console.log(costumerAge)
@@ -48,29 +44,48 @@ let costumerAge = document.getElementById("SelectAge").selectedIndex;
 
 // // memorizzare prezzo biglietto 0.21€/km
 
-// let ticketPriceRounded = Math.round((ticketPrice + Number.EPSILON) * 100) / 100;
+let ticketPriceRounded = Math.round((ticketPrice + Number.EPSILON) * 100) / 100;
 
 // // aggiunta variabili
 let priceUnderAge;
 let priceOverAge;
 
-// -IF cliente < 18 anni:
-if (costumerAge === 0) {
-    priceUnderAge = Math.round(((ticketPrice - ((ticketPrice * 20) /100)) + Number.EPSILON) * 100) /100;
-    console.log(`Prezzo finale per minorenne: ${priceUnderAge}`)
-// -ELSE IF cliente > 65 anni:
-} else if (costumerAge === 2) {
-    priceOverAge = Math.round(((ticketPrice - ((ticketPrice * 40) /100)) + Number.EPSILON) * 100) /100;
-    console.log(`Prezzo finale per adulto over65: ${priceOverAge}`)
-// -ELSE cliente >18 anni e <65 anni
-} else {
-    console.log(`Prezzo finale per adulto: ${ticketPriceRounded}`) 
-}
-
-
+// selezione dei kilometri
+let costumerKm = document.getElementById("kmElement");
+let kmChoosen = costumerKm.value;
+console.log("Inseriti kilometri da percorrere: " + kmChoosen);
 
 // // PULSANTE
-// const button = document.querySelector('input');
-// button.addEventListener("click");
+const button = document.getElementById('genNewTicket');
+button.addEventListener("click", function() {
 
-// function click() {
+    let ticketPrice = (kmElement.value * kmPrice);
+    let costumerAge = document.getElementById("SelectAge").selectedIndex;
+
+    // IF cliente > 18 anni:
+    if (costumerAge === 0) {
+        priceUnderAge = Math.round(((ticketPrice - ((ticketPrice * 20) /100)) + Number.EPSILON) * 100) /100;
+        console.log(`Prezzo finale per minorenne: ${priceUnderAge}`)
+    // -ELSE IF cliente > 65 anni:
+    } else if (costumerAge === 2) {
+        priceOverAge = Math.round(((ticketPrice - ((ticketPrice * 40) /100)) + Number.EPSILON) * 100) /100;
+        console.log(`Prezzo finale per adulto over65: ${priceOverAge}`)
+    // -ELSE cliente >18 anni e <65 anni
+    } else {
+        console.log(`Prezzo finale per adulto: ${ticketPriceRounded}`) 
+    }
+
+    let kmChoosen = costumerKm.value;
+
+    document.getElementById("newTicket").style.display = "block";
+    document.getElementById("genNickname").innerHTML = "Dati passeggero: " + costumerNickname;     
+    document.getElementById("genKm").innerHTML = "Km del viaggio: " + kmChoosen;
+    document.getElementById("genTicketPrice").innerHTML = "Prezzo del biglietto: <strong>€" + ticketPrice + "</strong>";
+});
+
+document.getElementById("closeTicket").addEventListener("click", function() {
+  
+    document.getElementById("newTicket").style.display = "none";
+    costumerKm.value = "";
+    costumerAge.value = "";
+});
